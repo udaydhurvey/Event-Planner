@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import Loginbg from "../assets/login.jpg";
 import { Link } from "react-router-dom";
+
+
 function Register() {
 
   const [registerData, setRegisterData] = useState({
@@ -20,7 +22,6 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     console.log(registerData);
 
     setRegisterData({
@@ -43,7 +44,7 @@ function Register() {
           </h1>
         </div>
 
-        <form className="space-y-4 " onSubmit={handleSubmit}>
+        <form className="space-y-4 relative top-3" onSubmit={handleSubmit}>
           <div>
             <label className="block text-black mb-1">Name</label>
             <input

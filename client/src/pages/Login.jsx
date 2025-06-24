@@ -1,23 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import Loginbg from "../assets/login.jpg";
 import { Link } from "react-router-dom";
 function Login() {
+
+  const [loginData, SetLoginData] = useState({
+    email: "",
+    password: "",
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    SetLoginData((previousData) => ({...previousData,[name]: value}));
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(loginData);
+
+    SetLoginData({
+      email: "",
+      password: "",
+    })
+  }
+
   return (
     <div className="mt-[-2%] relative flex items-center justify-center p-4">
       <img src={Loginbg} alt="" className="absolute -z-1 w-full" />
       <div className="backdrop-blur-md border-2 border-[#efcad1] rounded-2xl shadow-2xl p-8 w-full max-w-md mt-10">
         <div className="text-center mb-6">
           <div className="text-5xl mb-4"></div>
-          <h1 className="text-3xl font-bold text-pink-500 mb-2">
-            Login
-          </h1>
+          <h1 className="text-3xl font-bold text-pink-500 mb-2">Login</h1>
         </div>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label className="block text-black mb-1">Email</label>
             <input
               type="email"
+              name="email"
+              value={loginData.email}
+              onChange={handleChange}
               placeholder="Enter your email"
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400"
             />
@@ -26,6 +48,9 @@ function Login() {
             <label className="block text-black mb-1">Password</label>
             <input
               type="password"
+              name="password"
+              value={loginData.password}
+              onChange={handleChange}
               placeholder="Enter your password"
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400"
             />
@@ -49,9 +74,7 @@ function Login() {
 
         <p className="text-black text-center mt-4">
           Don’t have an account?{" "}
-          <a href="#" className="text-pink-600 hover:underline">
-            <Link to={"/register"}>Register</Link>
-          </a>
+            <Link to={"/register"} className="text-pink-600 hover:underline">Register</Link>
         </p>
       </div>
     </div>
