@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
-      <div className="bg-transparent flex justify-center gap-10 items-center sticky top-0 z-99 text-2xl text-black">
+      <div className="bg-transparent flex justify-center gap-10 items-center sticky top-0 z-99 text-2xl text-white font-serif">
         <Link to={"/"}>Home</Link>
         <Link to={"/about"}>About</Link>
         <Link to={"/services"}>Services</Link>
