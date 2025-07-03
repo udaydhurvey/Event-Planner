@@ -102,7 +102,7 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#b42c38] text-white py-3   rounded-lg hover:bg-[#915156] transition duration-300"
+              className="w-full bg-[#b42c38] text-white py-3  rounded-lg hover:bg-[#915156] transition duration-300"
             >
               <div className="flex items-center justify-center gap-3">
                 <div className="pt-1.5">
