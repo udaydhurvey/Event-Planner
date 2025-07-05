@@ -70,7 +70,7 @@ function Register() {
           </div>
 
           <div>
-            <label className="block text-black mb-1">Mobile No.</label>
+            <label className="block text-black mb-1">Phone</label>
             <input
               type="tel"
               name="phone"
