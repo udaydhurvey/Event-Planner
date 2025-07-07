@@ -2,36 +2,40 @@ import React from "react";
 import { useState } from "react";
 import Loginbg from "../assets/login.jpg";
 import { Link } from "react-router-dom";
-
+import api from "../config/api";
+import { toast } from "react-hot-toast";
 
 function Register() {
-
   const [registerData, setRegisterData] = useState({
     fullName: "",
     email: "",
     password: "",
     phone: "",
-  })
+  });
 
-  const handleChange=(e)=>{
-    const {name,value}=e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    setRegisterData((previousData) =>({...previousData,[name]:value}))
-  }
+    setRegisterData((previousData) => ({ ...previousData, [name]: value }));
+  };
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log(registerData);
-
-    setRegisterData({
-      fullName: "",
-      email: "",
-      password: "",
-      phone: "",
-    })
-  }
-
+    try {
+      const res = await api.post("/auth/register", registerData);
+      toast.success(res.data.message);
+      setRegisterData({
+        fullName: "",
+        email: "",
+        password: "",
+        phone: "",
+      });
+    } catch (error) {
+      toast.error(`Error : ${error.response?.status ||  error.message} | ${ error.response?.data.message || ""}`);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center h-200">
@@ -63,7 +67,7 @@ function Register() {
               type="email"
               name="email"
               placeholder="Enter your email"
-               value={registerData.email}
+              value={registerData.email}
               onChange={handleChange}
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400"
             />
@@ -75,7 +79,7 @@ function Register() {
               type="tel"
               name="phone"
               placeholder="Enter your mobile number"
-               value={registerData.phone}
+              value={registerData.phone}
               onChange={handleChange}
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400"
             />
@@ -87,7 +91,7 @@ function Register() {
               type="password"
               name="password"
               placeholder="Create your password"
-               value={registerData.password}
+              value={registerData.password}
               onChange={handleChange}
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400"
             />

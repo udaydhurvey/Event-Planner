@@ -1,27 +1,40 @@
 import React, { useState } from "react";
 import Loginbg from "../assets/login.jpg";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import api from "../config/api";
+import {toast} from "react-hot-toast";
 function Login() {
+  const navigate = useNavigate();
 
   const [loginData, SetLoginData] = useState({
     email: "",
     password: "",
-  })
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    SetLoginData((previousData) => ({...previousData,[name]: value}));
-  }
+    SetLoginData((previousData) => ({ ...previousData, [name]: value }));
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(loginData);
 
-    SetLoginData({
-      email: "",
-      password: "",
-    })
-  }
+    try {
+      const res = await api.post("/auth/login", loginData);
+      toast.success(res.data.message);
+
+      SetLoginData({
+        email: "",
+        password: "",
+      });
+
+      navigate("/userDashboard")
+    } catch (error) {
+      toast.error(`Error : ${error.response.status} | ${error.response.data.message}`);
+    }
+  };
 
   return (
     <div className="mt-[-2%] relative flex items-center justify-center p-4">
@@ -41,6 +54,7 @@ function Login() {
               value={loginData.email}
               onChange={handleChange}
               placeholder="Enter your email"
+              required
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400"
             />
           </div>
@@ -51,7 +65,8 @@ function Login() {
               name="password"
               value={loginData.password}
               onChange={handleChange}
-              placeholder="Enter your password"
+              placeholder="Enter your password" 
+              required
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400"
             />
           </div>
@@ -66,7 +81,7 @@ function Login() {
           </div>
           <button
             type="submit"
-            className="w-full bg-pink-500 hover:bg-pink-300 text-black font-semibold py-3 rounded-lg shadow-lg transition"
+            className="w-full bg-pink-500 hover:bg-pink-300  text-black font-semibold py-3 rounded-lg shadow-lg transition"
           >
             Login
           </button>
@@ -74,7 +89,9 @@ function Login() {
 
         <p className="text-black text-center mt-4">
           Don’t have an account?{" "}
-            <Link to={"/register"} className="text-pink-600 hover:underline">Register</Link>
+          <Link to={"/register"} className="text-pink-600 hover:underline">
+            Register
+          </Link>
         </p>
       </div>
     </div>

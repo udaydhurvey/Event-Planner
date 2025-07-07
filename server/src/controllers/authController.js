@@ -1,5 +1,6 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import genToken from "../utils/auth.js";
 
 export const RegisterUser = async (req, res, next) => {
   try {
@@ -59,9 +60,11 @@ export const LoginUser = async (req, res, next) => {
       return next(error);
     }
 
+    genToken(user._id, res);
+    
     res
       .status(200)
-      .json({ message: `Welcome BAck ${user.fullName}`, data: user });
+      .json({ message: `Welcome Back ${user.fullName} !!`, data: user });
   } catch (error) {
     next(error);
   }

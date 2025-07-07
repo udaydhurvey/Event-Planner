@@ -1,6 +1,6 @@
 import React from "react";
 import bgphoto from "../assets/backgroundimage.jpg";
-import { Link } from "react-router-dom";
+
 
 const Hero = () => {
   return (
@@ -24,9 +24,9 @@ const Hero = () => {
 
         <div className="flex justify-center items-center gap-10 pt-3">
           <button className="rounded px-5 py-3 bg-transparent border-1 border-pink-500 text-pink-500 hover:bg-pink-600 hover:text-white">
-            <Link to={"/Login"}>Login</Link>
+            Book Now
           </button>
-          <button className="rounded px-5 py-3 bg-transparent border-1 border-pink-500 text-pink-500">Book Now</button>
+          <button className="rounded px-5 py-3 bg-transparent border-1 border-pink-500 text-pink-500">Read More</button>
         </div>
       </div>
     </div>

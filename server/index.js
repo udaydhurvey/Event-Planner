@@ -3,11 +3,13 @@ dotenv.config(); // file se variable pe load karta hai
 
 import express from "express";
 import morgan from "morgan";
+import cors from "cors";
 import connectDB from "./src/config/db.js";
 import AuthRoutes from "../server/src/routes/authRouter.js"
 
-
 const app = express();
+
+app.use(cors({origin:"http://localhost:5173", credentials: true}));
 
 app.use(express.json());
 app.use(morgan("dev"));
