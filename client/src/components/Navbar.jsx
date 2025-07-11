@@ -7,10 +7,10 @@ import { GrContact } from "react-icons/gr";
 const Navbar = () => {
   return (
     <>
-      <div className="bg-transparent flex justify-center gap-10 items-center sticky top-0 z-99 text-s text-white font-serif">
+      <div className=" bg-transparent flex justify-center ms-30 gap-10 items-center sticky top-0 z-99 text-s text-white font-serif">
         <div className="flex justify-center items-center gap-1">
-          <Link to={"/"}>HOME</Link>
-          <IoMdHome  className="text-xl mb-1"/>
+          <IoMdHome className="text-xl mb-1" />
+          <Link to={"/"} className="relative inline-block">HOME</Link>
         </div>
         <Link to={"/about"}>ABOUT</Link>
         <Link to={"/services"}>SERVICES</Link>
@@ -20,10 +20,9 @@ const Navbar = () => {
         </Link>
         <Link to={"/stories"}>STORIES</Link>
         <Link to={"/gallery"}>GALLERY</Link>
-        <div className="flex justify-center items-center gap-2 hover:translate-y-9">
+        <div className="flex justify-center items-center gap-2">
           <Link to={"/contact"}>CONTACT</Link>
-          <GrContact className="text-xl mt-1 "/>
-          
+          <GrContact className="text-xl mt-1 " />
         </div>
         <button className="rounded px-3 py-1 bg-transparent border-1 border-pink-500 text-pink-500 hover:bg-pink-600 hover:text-white">
           <Link to={"/Login"}>Login</Link>

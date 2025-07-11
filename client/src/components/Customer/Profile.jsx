@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import api from "../config/api";
+import api from "../../config/api";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 
-const UserDashboard = () => {
+const Profile = () => {
   const navigate = useNavigate();
   const [userdata, setUserData] = useState("");
 
@@ -56,7 +56,7 @@ const UserDashboard = () => {
           </h3>
         </div>
         <button
-          className="absolute top-1 right-1 border p-2 rounded-lg flex gap-2 justify-center items-center bg-rose-300 hover:bg-rose-400 text-lg"
+          className="absolute top-1 right-1 border p-2 rounded-lg flex gap-2 justify-center items-center bg-gray-500 hover:bg-gray-700 hover:text-white text-lg"
           onClick={() => navigate("/userDashboardEdit")}
         >
           
@@ -68,4 +68,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default Profile;

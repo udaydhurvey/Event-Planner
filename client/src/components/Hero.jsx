@@ -15,10 +15,10 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black opacity-50 -z-10"></div>
 
       <div className="grid justify-center items-center ">
-        <h1 className="text-white text-8xl tracking-tight font-bold font-[family-name:var(--customFont2)]">
+        <h1 className="text-white text-8xl tracking-tight font-bold font-serif">
           Turn Your Dream
         </h1>
-        <h1 className="text-white text-8xl font-bold font-[family-name:var(--customFont2)] tracking-tight text-shadow-2xs text-shadow-amber-500 ml-35">
+        <h1 className="text-white text-8xl font-bold font-serif tracking-tight text-shadow-2xs text-shadow-amber-500 ml-35">
           Into Reality
         </h1>
 

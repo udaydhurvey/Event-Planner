@@ -30,7 +30,7 @@ function Login() {
         password: "",
       });
 
-      navigate("/userDashboard")
+      navigate("/dashboard")
     } catch (error) {
       toast.error(`Error : ${error.response.status} | ${error.response.data.message}`);
     }
@@ -81,7 +81,7 @@ function Login() {
           </div>
           <button
             type="submit"
-            className="w-full bg-pink-500 hover:bg-pink-300  text-black font-semibold py-3 rounded-lg shadow-lg transition"
+            className="w-full bg-pink-500  hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600  hover:scale-103 text-black font-semibold py-3 rounded-lg shadow-lg transition"
           >
             Login
           </button>
@@ -89,7 +89,7 @@ function Login() {
 
         <p className="text-black text-center mt-4">
           Don’t have an account?{" "}
-          <Link to={"/register"} className="text-pink-600 hover:underline">
+          <Link to={"/register"} className="text-pink-600  transition hover:underline">
             Register
           </Link>
         </p>

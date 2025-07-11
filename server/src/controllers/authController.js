@@ -22,11 +22,14 @@ export const RegisterUser = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+     const profilePic = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`
+
     const newUser = await User.create({
       fullName,
       email,
       phone,
       password: hashedPassword,
+      photo:profilePic,
     });
 
     res.status(201).json({ message: "Registration Successfull" });
