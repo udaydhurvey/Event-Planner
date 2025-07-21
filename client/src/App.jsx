@@ -25,7 +25,6 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             
             <Route path="/dashboard" element={<CustomerDashboard />} />
-            
           </Routes>
         </main>
       </BrowserRouter>

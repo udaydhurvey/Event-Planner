@@ -3,10 +3,12 @@ import bgcontact from "../assets/contact1.jpg";
 import { Link } from "react-router-dom";
 import { MdMessage } from "react-icons/md";
 import contact from "../assets/lets-chat.jpg";
+import { toast } from "react-hot-toast";
+import api from "../config/api";
 
 const Contact = () => {
   const [contactData, SetContactData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     phone: "",
     message: "",
@@ -18,16 +20,25 @@ const Contact = () => {
     SetContactData((previousData) => ({ ...previousData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(contactData);
 
-    SetContactData({
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
+    try {
+      const res = await api.post("/public/contactus", contactData);
+      toast.success(res.data.message);
+      SetContactData({
+        fullName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (error) {
+      toast.error(
+        `Error : ${error.response?.status || error.message} | ${
+          error.response?.data.message || ""
+        }`
+      );
+    }
   };
 
   return (
@@ -49,8 +60,8 @@ const Contact = () => {
               </label>
               <input
                 type="text"
-                name="name"
-                value={contactData.name}
+                name="fullName"
+                value={contactData.fullName}
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-[#8b5a5c] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d9cbb7]"
@@ -91,7 +102,6 @@ const Contact = () => {
               </label>
               <textarea
                 name="message"
-                required
                 rows="4"
                 value={contactData.message}
                 onChange={handleChange}
@@ -102,7 +112,7 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#b42c38] text-white py-3  rounded-lg hover:bg-[#915156] transition duration-300"
+              className="w-full bg-pink-500 text-white py-3  rounded-lg hover:bg-pink-700 transition duration-300"
             >
               <div className="flex items-center justify-center gap-3">
                 <div className="pt-1.5">
