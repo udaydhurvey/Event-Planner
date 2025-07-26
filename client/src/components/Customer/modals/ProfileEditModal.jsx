@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { IoIosCloseCircle, IoIosSave } from "react-icons/io";
 import { FaCamera } from "react-icons/fa";
-import api from "../../config/api";
-import {toast} from "react-hot-toast"
+import api from "../../../config/api";
+import { toast } from "react-hot-toast";
+import { useAuth } from "../../../context/AuthContext";
 
 const indianStates = [
   "Andhra Pradesh",
@@ -32,12 +33,11 @@ const indianStates = [
   "Tripura",
   "Uttar Pradesh",
   "Uttarakhand",
-  "West Bengal"
+  "West Bengal",
 ];
 
-
-
 const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
+  const { setUser } = useAuth();
   const [userdata, setUserData] = useState({
     fullName: "",
     email: "",
@@ -47,8 +47,8 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
     occupation: "",
     address: "",
     city: "",
-    district: "",
     state: "",
+    district: "",
     representing: "",
   });
 
@@ -73,16 +73,15 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
     const formData = new FormData();
 
     formData.append("fullName", userdata.fullName);
-    formData.append("phone", userdata.phone);
     formData.append("picture", picture);
-    formData.append("gender",userdata.gender)
-    formData.append("occupation",userdata.occupation)
-    formData.append("address",userdata.address)
-    formData.append("city",userdata.city)
-    formData.append("state",userdata.state)
-    formData.append("district",userdata.district)
-    formData.append("representing",userdata.representing)
-    
+    formData.append("phone", userdata.phone);
+    formData.append("gender", userdata.gender);
+    formData.append("occupation", userdata.occupation);
+    formData.append("address", userdata.address);
+    formData.append("city", userdata.city);
+    formData.append("state", userdata.state);
+    formData.append("district", userdata.district);
+    formData.append("representing", userdata.representing);
 
     try {
       const res = await api.put("/user/update", formData, {
@@ -91,8 +90,9 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
         },
       });
       toast.success(res.data.message);
-      setUserData(res.data.data);
-      
+      setUser(res.data.data);
+      sessionStorage.setItem("EventUser", JSON.stringify(res.data.data));
+      onClose();
     } catch (error) {
       toast.error(
         `Error : ${error.response?.status || error.message} | ${
@@ -106,12 +106,7 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
 
   useEffect(() => {
     if (oldData) {
-      setUserData({
-        fullName: oldData.fullName || "",
-        email: oldData.email || "",
-        phone: oldData.phone || "",
-        photo: oldData.photo || "",
-      });
+      setUserData(oldData);
     }
   }, [isOpen, oldData]);
 
@@ -125,151 +120,143 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
           <div className="text-xl flex justify-between p-3 border-b-2 sticky top-0 bg-white z-10">
             <h1 className="font-bold">Edit Profile</h1>
             <button onClick={onClose}>
-              <IoIosCloseCircle className="text-3xl text-red-500" />
+              <IoIosCloseCircle className="text-3xl text-teal-500" />
             </button>
           </div>
 
-          <div className="flex flex-col gap-4 p-6 bg-white rounded-2xl shadow-md">
-            <div className="relative w-40 h-40 mx-auto">
-              <div className="w-full h-full rounded-full overflow-hidden shadow-sm border border-rose-200">
-                <img
-                  src={preview || userdata.photo}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="border rounded-full p-2 w-fit absolute bottom-2 right-2 bg-rose-200 hover:bg-blue-500 hover:text-white transition-colors cursor-pointer shadow-sm">
-                <label
-                  className="text-2xl cursor-pointer"
-                  htmlFor="imageUpload"
-                >
-                  <FaCamera />
-                </label>
+          <div className="flex flex-col gap-3 p-4">
+            <div className="relative w-36 h-36 mx-auto group transition-transform hover:scale-105 duration-300">
+              <img
+                src={preview || userdata.photo}
+                alt="Profile"
+                className="w-36 h-36 rounded-full object-cover border-4 border-rose-300 shadow-lg"
+              />
+              <label
+                htmlFor="imageUpload"
+                className="absolute bottom-2 right-2 p-2 bg-white border border-gray-300 rounded-full shadow-md text-xl text-rose-400 group-hover:bg-rose-400 group-hover:text-white transition cursor-pointer"
+              >
+                <FaCamera />
                 <input
                   type="file"
-                  className="hidden"
                   id="imageUpload"
+                  className="hidden"
                   onChange={handleImageChange}
                 />
-              </div>
+              </label>
             </div>
-
-            <div className="grid gap-4 p-4 w-full grid-cols-[30%_70%] items-center text-gray-800">
-              <span className="font-semibold text-sm">Email:</span>
+            <div className="grid gap-3 p-5  w-full grid-cols-[30%_70%] justify-items-center items-center">
+              <span className="font-bold text-md">Email : </span>
               <input
                 type="text"
-                name="fullname"
+                name="email"
                 value={userdata.email}
                 onChange={handleChange}
-                className="p-2 w-full bg-gray-100 border border-gray-200 rounded-md"
+                className="p-2 w-full"
                 disabled
               />
 
-              <span className="font-semibold text-sm">Name:</span>
+              <span className="font-bold text-md">Name : </span>
               <input
                 type="text"
                 name="fullname"
                 value={userdata.fullName}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               />
-
-              <span className="font-semibold text-sm">Phone:</span>
+              <span className="font-bold text-md">Phone : </span>
               <input
                 type="tel"
                 name="phone"
                 value={userdata.phone}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               />
+              <span className="font-bold text-md">Gender : </span>
 
-              <span className="font-semibold text-sm">Gender:</span>
               <select
                 name="gender"
                 value={userdata.gender}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full bg-white"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               >
                 <option value="N/A">N/A</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
-
-              <span className="font-semibold text-sm">Occuption:</span>
+              <span className="font-bold text-md">Occupation : </span>
               <input
                 type="text"
                 name="occupation"
                 value={userdata.occupation}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               />
-
-              <span className="font-semibold text-sm">Address:</span>
+              <span className="font-bold text-md">Address : </span>
               <input
                 type="text"
                 name="address"
                 value={userdata.address}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               />
-
-              <span className="font-semibold text-sm">City:</span>
+              <span className="font-bold text-md">City : </span>
               <input
                 type="text"
                 name="city"
                 value={userdata.city}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               />
-
-              <span className="font-semibold text-sm">District:</span>
+              <span className="font-bold text-md">District : </span>
               <input
                 type="text"
                 name="district"
                 value={userdata.district}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               />
-
-              <span className="font-semibold text-sm">State:</span>
+              <span className="font-bold text-md">State : </span>
               <select
                 name="state"
                 value={userdata.state}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full bg-white"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               >
                 <option value="N/A">N/A</option>
                 {indianStates ? (
-                  indianStates.map(
-                    (state,i) => <option value={state} key={i}>{state}</option>
-                  )
+                  indianStates.map((rajya, i) => (
+                    <option value={rajya} key={i}>
+                      {rajya}
+                    </option>
+                  ))
                 ) : (
-                  <option value={""}>No States available</option>
+                  <option value={""}>No states available</option>
                 )}
               </select>
-
-              <span className="font-semibold text-sm">Representing:</span>
+              <span className="font-bold text-md">Representing : </span>
               <select
                 name="representing"
                 value={userdata.representing}
                 onChange={handleChange}
-                className="p-2 border border-rose-300 rounded-md w-full bg-white"
+                className="p-2 border rounded-lg border-grey-300 w-full"
               >
                 <option value="N/A">N/A</option>
-                <option value="male">Bride Side</option>
-                <option value="female">Groom Side</option>
-                <option value="other">Common</option>
+                <option value="Bride">Bride side</option>
+                <option value="Groom">Groom Side</option>
+                <option value="both">Common</option>
               </select>
+             
             </div>
-
-            <button
-              className="border p-2 rounded-lg flex gap-2 justify-center items-center bg-rose-300 hover:bg-rose-400 transition-all text-white font-semibold text-lg shadow-sm"
-              onClick={handleEditProfile}
-            >
-              <IoIosSave />
-              {loading ? "Saving Data . . . " : "Save Data"}
-            </button>
+            <div className="flex item-center justify-center">
+               <button
+                className="border p-2 w-100 rounded-lg flex gap-2 justify-center items-center bg-grey-300 hover:bg-grey-400 bg-teal-600 text-lg"
+                onClick={handleEditProfile}
+              >
+                <IoIosSave />
+                {loading ? "Saving Data . . . " : "Save Data"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

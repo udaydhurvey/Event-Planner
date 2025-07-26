@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
@@ -27,7 +26,7 @@ const userSchema = mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["male", "female", "other", "N/A"],
+      enum: ["Male", "Female", "Other", "N/A"],
       default: "N/A",
       required: true,
     },
@@ -60,6 +59,18 @@ const userSchema = mongoose.Schema(
     state: {
       type: String,
       default: "N/A",
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["Admin", "User","N/A"],
+      default: "User",
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["Active", "Inactive"],
+      default: "Active",
       required: true,
     },
   },

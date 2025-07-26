@@ -3,41 +3,45 @@ import Loginbg from "../assets/login.jpg";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import api from "../config/api";
-import {toast} from "react-hot-toast";
-
-
+import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const navigate = useNavigate();
+  const { user, setUser, isLogin, setIsLogin, isAdmin, setIsAdmin } = useAuth();
 
-  const [loginData, SetLoginData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    SetLoginData((previousData) => ({ ...previousData, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(loginData);
+    const logindata = {
+      email: email,
+      password: password,
+    };
 
     try {
-      const res = await api.post("/auth/login", loginData);
+      const res = await api.post("/auth/login", logindata);
       toast.success(res.data.message);
-
-      SetLoginData({
-        email: "",
-        password: "",
-      });
-
-      navigate("/dashboard")
+      setPassword("");
+      setEmail("");
+      setUser(res.data.data);
+      sessionStorage.setItem("EventUser",JSON.stringify(res.data.data));
+      setIsLogin(true);
+      res.data.data.role === "Admin"
+        ? (setIsAdmin(true), navigate("/adminpanel"))
+        : navigate("/dashboard");
     } catch (error) {
-      toast.error(`Error : ${error.response.status} | ${error.response.data.message}`);
+      toast.error(
+        `Error : ${error.response?.status || error.message} | ${
+          error.response?.data.message || ""
+        }`
+      );
+      console.log(error);
     }
+    console.log(logindata);
   };
+
 
   return (
     <div className="mt-[-2%] relative flex items-center justify-center p-4">
@@ -54,8 +58,8 @@ function Login() {
             <input
               type="email"
               name="email"
-              value={loginData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400"
@@ -66,9 +70,9 @@ function Login() {
             <input
               type="password"
               name="password"
-              value={loginData.password}
-              onChange={handleChange}
-              placeholder="Enter your password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
               required
               className="w-full p-3 rounded-lg  text-pink-600 border border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400"
             />
@@ -92,7 +96,10 @@ function Login() {
 
         <p className="text-black text-center mt-4">
           Don’t have an account?{" "}
-          <Link to={"/register"} className="text-pink-600  transition hover:underline">
+          <Link
+            to={"/register"}
+            className="text-pink-600  transition hover:underline"
+          >
             Register
           </Link>
         </p>

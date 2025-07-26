@@ -7,65 +7,89 @@ import {
   FaCommentDots,
   FaSignOutAlt,
 } from "react-icons/fa";
+import api from "../../config/api";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Sidebar = ({ active, setActive }) => {
+  const { setUser, setIsLogin, setIsAdmin, user } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    const res = await api.get("/auth/logout");
+    setUser("");
+    sessionStorage.removeItem("EventUser");
+    setIsLogin(false);
+    setIsAdmin(false);
+    navigate("/");
+  };
+
   return (
     <>
-      <div className="w-100 border min-h-[88vh] p-5 flex flex-col justify-between">
+      <div className="w-100 bg-gradient-to-b from-slate-50 to-slate-100 border-r border-gray-200 min-h-[87vh] p-6 flex flex-col justify-between shadow-lg">
         <div>
-          <div className="border-b-2 pb-3 h-fit">
-            <span className="text-2xl ms-3 font-bold">Customer's Dashboard</span>
+          <div className="border-b-2 border-rose-200 pb-4 h-fit text-center">
+            <span className="text-2xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">
+              {user.fullName.split(" ")[0]}'s Dashboard
+            </span>
           </div>
 
-          <div className="py-8 px-5">
-            <ul className="grid gap-2">
+          <div className="py-8 px-2">
+            <ul className="grid gap-3">
               <li
-                className={`flex items-center gap-2 border p-3 rounded-lg text-lg hover:bg-cyan-500 hover:text-white transition hover:scale-104 ${
-                  active === "overview" && "bg-cyan-500 text-white"
+                className={`flex items-center gap-3 border border-gray-200 p-4 rounded-xl text-lg font-medium cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-rose-500 hover:to-pink-500 hover:text-white hover:shadow-md hover:scale-105 ${
+                  active === "overview" &&
+                  "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md scale-105"
                 }`}
-                onClick={()=>setActive("overview")}
+                onClick={() => setActive("overview")}
               >
-                <FaTachometerAlt /> Overview
+                <FaTachometerAlt className="text-xl" /> Overview
               </li>
               <li
-                className={`flex items-center gap-2 border p-3 rounded-lg text-lg  hover:bg-cyan-500 hover:text-white transition hover:scale-104 ${
-                  active === "profile" && "bg-cyan-500 text-white"
+                className={`flex items-center gap-3 border border-gray-200 p-4 rounded-xl text-lg font-medium cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-rose-500 hover:to-pink-500 hover:text-white hover:shadow-md hover:scale-105 ${
+                  active === "profile" &&
+                  "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md scale-105"
                 }`}
-                onClick={()=>setActive("profile")}
+                onClick={() => setActive("profile")}
               >
-                <FaUser /> Profile
+                <FaUser className="text-xl" /> Profile
               </li>
               <li
-                className={`flex items-center gap-2 border p-3 rounded-lg text-lg hover:bg-cyan-500 hover:text-white transition hover:scale-104 ${
-                  active === "bookings" && "bg-cyan-500 text-white"
+                className={`flex items-center gap-3 border border-gray-200 p-4 rounded-xl text-lg font-medium cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-rose-500 hover:to-pink-500 hover:text-white hover:shadow-md hover:scale-105 ${
+                  active === "bookings" &&
+                  "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md scale-105"
                 }`}
-                 onClick={()=>setActive("bookings")}
+                onClick={() => setActive("bookings")}
               >
-                <FaCalendarCheck /> Bookings
+                <FaCalendarCheck className="text-xl" /> Bookings
               </li>
               <li
-                className={`flex items-center gap-2 border p-3 rounded-lg text-lg hover:bg-cyan-500 hover:text-white  transition hover:scale-104 ${
-                  active === "support" && "bg-cyan-500 text-white"
+                className={`flex items-center gap-3 border border-gray-200 p-4 rounded-xl text-lg font-medium cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-rose-500 hover:to-pink-500 hover:text-white hover:shadow-md hover:scale-105 ${
+                  active === "support" &&
+                  "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md scale-105"
                 }`}
-                 onClick={()=>setActive("support")}
+                onClick={() => setActive("support")}
               >
-                <FaLifeRing /> Support
+                <FaLifeRing className="text-xl" /> Support
               </li>
               <li
-                className={`flex items-center gap-2 border p-3 rounded-lg text-lg hover:bg-cyan-500 hover:text-white ${
-                  active === "feedback" && "bg-cyan-500 text-white"
+                className={`flex items-center gap-3 border border-gray-200 p-4 rounded-xl text-lg font-medium cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-rose-500 hover:to-pink-500 hover:text-white hover:shadow-md hover:scale-105 ${
+                  active === "feedback" &&
+                  "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md scale-105"
                 }`}
-                 onClick={()=>setActive("feedback")}
+                onClick={() => setActive("feedback")}
               >
-                <FaCommentDots /> Feedback
+                <FaCommentDots className="text-xl" /> Feedback
               </li>
             </ul>
           </div>
         </div>
         <div>
-          <button className="text-xl text-red-500 font-bold w-full h-full border border-red-500 p-3 rounded-lg flex gap-2 items-center justify-center hover:bg-red-500 hover:text-white transition hover:scale-104">
+          <button
+            className="text-lg text-red-600 font-semibold w-full border-2 border-red-300 p-4 rounded-xl flex gap-3 items-center justify-center hover:bg-red-500 hover:text-white hover:border-red-500 transition-all duration-300 hover:shadow-lg bg-red-50"
+            onClick={handleLogout}
+          >
             Logout
-            <FaSignOutAlt />
+            <FaSignOutAlt className="text-xl" />
           </button>
         </div>
       </div>
