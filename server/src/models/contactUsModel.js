@@ -8,7 +8,6 @@ const contactSchema = mongoose.Schema(
     email: {
       type: String,
       required: true,
-     
     },
     message: {
       type: String,
@@ -16,6 +15,12 @@ const contactSchema = mongoose.Schema(
     },
     phone: {
       type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["Pending", "Resolved", "Rejected"],
+      default: "Pending",
       required: true,
     },
   },

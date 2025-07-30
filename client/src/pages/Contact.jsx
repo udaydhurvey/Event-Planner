@@ -49,7 +49,7 @@ const Contact = () => {
           <img src={contact} alt="" className="h-149  w-100" />
         </div>
         <div className=" bg-white border-2 border-[#d9cbb7]  shadow-2xl p-8 w-full max-w-md mt-10">
-          <h1 className="text-4xl font-bold text-center text-[#b42c38] mb-6 font-serif">
+          <h1 className="text-4xl font-bold text-center text-pink-700 mb-6 font-serif">
             Let's Talk Us
           </h1>
 
@@ -112,7 +112,7 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="w-full bg-pink-500 text-white py-3  rounded-lg hover:bg-pink-700 transition duration-300"
+              className="w-full text-white py-3  rounded-lg bg-pink-700 hover:scale-105 transition duration-300"
             >
               <div className="flex items-center justify-center gap-3">
                 <div className="pt-1.5">

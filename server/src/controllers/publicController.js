@@ -15,6 +15,7 @@ export const ContactUs = async (req, res, next) => {
           email,
           phone,
           message,
+          status:"Pending",
         });
     
         res.status(201).json({ message: "Thank You For Contact Us" });

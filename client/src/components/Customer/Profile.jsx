@@ -13,15 +13,13 @@ const Profile = () => {
 
   return (
     <>
-     {/* Top Bar */}
-{/* Top Bar */}
-<div className="flex justify-between bg-gradient-to-r from-pink-600 to-purple-600 p-4 shadow-lg rounded-b-lg">
-  <h1 className="text-3xl font-bold text-white tracking-wide">Profile</h1>
+<div className="flex justify-between p-4 rounded-b-lg">
+  <h1 className="text-3xl font-bold text-gray-700 tracking-wide">Profile</h1>
   <button
     onClick={() => setIsEditModalOpen(true)}
-    className="border border-white hover:scale-105 cursor-pointer text-white px-4 py-2 rounded-lg font-bold flex gap-2 items-center hover:bg-white hover:text-pink-600 transition-all duration-200 text-lg"
+    className=" hover:scale-105 cursor-pointer bg-transparent border-1 border-pink-500 text-pink-500 px-4 py-2 rounded-lg font-bold flex gap-2 items-center hover:bg-white hover:text-pink-600 transition-all duration-200 text-lg"
   >
-    <FaUserEdit className="text-xl" />
+    <FaUserEdit className="text-xl " />
     Edit
   </button>
 </div>
@@ -38,26 +36,26 @@ const Profile = () => {
       />
     </div>
     <div className="text-gray-700">
-      <b className="text-red-600">Name:</b>
+      <b className="text-pink-600">Name:</b>
       <span className="text-gray-900 ml-2">{user.fullName}</span>
     </div>
     <div className="text-gray-700">
-      <b className="text-red-600">Email:</b>
+      <b className="text-pink-600">Email:</b>
       <span className="text-gray-900 ml-2">{user.email}</span>
     </div>
     <div className="text-gray-700">
-      <b className="text-red-600">Phone:</b>
+      <b className="text-pink-600">Phone:</b>
       <span className="text-gray-900 ml-2">{user.phone}</span>
     </div>
   </div>
 
   {/* Right Additional Info Card */}
   <div className="border border-purple-200 p-6 w-5/7 grid gap-4 rounded-xl bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300">
-    <h2 className="text-xl font-semibold text-purple-700 mb-4 border-b-2 border-purple-300 pb-2">
+    <h2 className="text-xl font-semibold text-pink-600 mb-4 border-b-2 border-purple-300 pb-2">
       Additional Information
     </h2>
     <div className="text-gray-700">
-      <b className="text-purple-700">Gender:</b>
+      <b className="text-purple-700 ">Gender:</b>
       <span className="text-gray-900 ml-2">{user.gender}</span>
     </div>
     <div className="text-gray-700">

@@ -12,7 +12,7 @@ const Hero = () => {
       />
 
       
-      <div className="absolute inset-0 bg-black opacity-50 -z-10"></div>
+      <div className="absolute inset-0 bg-black opacity-40 -z-10"></div>
 
       <div className="grid justify-center items-center ">
         <h1 className="text-white text-8xl tracking-tight font-bold font-serif">

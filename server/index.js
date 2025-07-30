@@ -7,7 +7,8 @@ import cors from "cors";
 import connectDB from "./src/config/db.js";
 import AuthRoutes from "../server/src/routes/authRouter.js";
 import UserRouter from "../server/src/routes/userRoutes.js";
-import PublicRouter from "../server/src/routes/publicRouter.js"
+import PublicRouter from "../server/src/routes/publicRouter.js";
+import AdminRouter from "../server/src/routes/adminRoutes.js"
 import cookieParser from "cookie-parser";
 import cloudinary from "./src/config/cloudinary.js";
 
@@ -22,6 +23,7 @@ app.use(morgan("dev"));
 app.use("/auth", AuthRoutes);
 app.use("/user", UserRouter);
 app.use("/public",PublicRouter);
+app.use("/admin",AdminRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "server connected" });
