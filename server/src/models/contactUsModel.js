@@ -23,6 +23,9 @@ const contactSchema = mongoose.Schema(
       default: "Pending",
       required: true,
     },
+    reply: { 
+      type: String 
+    },
   },
   { timestamps: true }
 );

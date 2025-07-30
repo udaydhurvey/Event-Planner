@@ -25,3 +25,5 @@ const sendEmail = async (to, subject, mailbody) => {
     return false;
   }
 };
+
+export default sendEmail;
