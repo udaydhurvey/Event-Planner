@@ -16,7 +16,6 @@ const ContactViewModal = ({ isOpen, onClose, Query }) => {
   const [query, setQuery] = useState({
     fullName: "",
     email: "",
-    subject: "",
     message: "",
     phone: "",
     status: "Pending",
@@ -140,9 +139,7 @@ const ContactViewModal = ({ isOpen, onClose, Query }) => {
             </div>
           </div>
 
-          {/* Content */}
           <div className="p-6">
-            {/* Customer Information */}
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <div className="space-y-4">
                 <div className="bg-gray-50 rounded-lg p-4">
@@ -170,16 +167,10 @@ const ContactViewModal = ({ isOpen, onClose, Query }) => {
                   <p className="text-gray-900">{query.phone}</p>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <label className="block text-sm font-semibold text-gray-600 mb-1">
-                    Subject
-                  </label>
-                  <p className="text-gray-900">{query.subject}</p>
-                </div>
+               
               </div>
             </div>
 
-            {/* Message */}
             <div className="mb-6">
               <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4">
                 <label className="block text-sm font-semibold text-blue-700 mb-2">
@@ -189,7 +180,6 @@ const ContactViewModal = ({ isOpen, onClose, Query }) => {
               </div>
             </div>
 
-            {/* Admin Response Section */}
             <div className="border-t-2 border-gray-200 pt-6">
               <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <FaEdit className="text-indigo-600" />
@@ -197,7 +187,6 @@ const ContactViewModal = ({ isOpen, onClose, Query }) => {
               </h4>
 
               <div className="space-y-4">
-                {/* Status Update */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Update Status
@@ -214,7 +203,7 @@ const ContactViewModal = ({ isOpen, onClose, Query }) => {
                     <option value="Rejected">🔴 Rejected</option>
                   </select>
                 </div>
-                {/* Reply Message */}
+
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Reply Message *

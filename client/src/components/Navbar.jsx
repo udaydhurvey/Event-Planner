@@ -66,7 +66,7 @@ const Navbar = () => {
                   alt="User Dp"
                   className="h-10 w-10 border rounded-full object-cover"
                 />
-                <span className="text-pink-500">{user.fullName}</span>
+                <span className="text-pink-400">{user.fullName}</span>
               </div>
             ) : (
               <button

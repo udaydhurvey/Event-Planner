@@ -120,7 +120,7 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
           <div className="text-xl flex justify-between p-3 border-b-2 sticky top-0 bg-white z-10">
             <h1 className="font-bold">Edit Profile</h1>
             <button onClick={onClose}>
-              <IoIosCloseCircle className="text-3xl text-teal-500" />
+              <IoIosCloseCircle className="text-3xl text-red-500" />
             </button>
           </div>
 
@@ -158,7 +158,7 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
               <span className="font-bold text-md">Name : </span>
               <input
                 type="text"
-                name="fullname"
+                name="fullName"
                 value={userdata.fullName}
                 onChange={handleChange}
                 className="p-2 border rounded-lg border-grey-300 w-full"
@@ -250,7 +250,7 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
             </div>
             <div className="flex item-center justify-center">
                <button
-                className="border p-2 w-100 rounded-lg flex gap-2 justify-center items-center bg-grey-300 hover:bg-grey-400 bg-teal-600 text-lg"
+                className="border p-2 w-100 rounded-lg flex gap-2 justify-center items-center bg-grey-300 hover:bg-grey-400 bg-pink-700 text-lg"
                 onClick={handleEditProfile}
               >
                 <IoIosSave />

@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema(
     representing: {
       type: String,
       default: "N/A",
-      enum: ["Bride", "Groom", "both", "N/A"],
+      enum: ["Bride", "Groom", "Common", "N/A"],
       required: true,
     },
     occupation: {
