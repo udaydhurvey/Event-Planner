@@ -7,7 +7,7 @@ import AccountDeactivateModal from "./modals/AccountDeactivationModal";
 import { useAuth } from "../../context/AuthContext";
 
 const Profile = () => {
-  const { user } = useAuth();
+  const {user} = useAuth();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
 

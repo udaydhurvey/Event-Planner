@@ -71,7 +71,7 @@ const Navbar = () => {
             ) : (
               <button
                 className="rounded px-5 py-1 bg-transparent border-1 border-pink-500 text-pink-500 hover:bg-pink-600 hover:text-white"
-                onClick={() => navigate("login")}
+                onClick={() => navigate("/login")}
               >
                 {" "}
                 Login{" "}

@@ -9,10 +9,8 @@ const upload=multer()
 const router = express.Router();
 
 router.get("/profile", Protect ,GetProfile);
-
 router.put("/update", Protect,upload.single("picture"), UpdateUser);
-
-router.put("/deactivate",Protect,deleteUser)
+router.put("/deactivate",Protect,deleteUser);
 
 
 export default router;

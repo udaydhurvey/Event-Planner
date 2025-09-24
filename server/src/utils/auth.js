@@ -11,6 +11,8 @@ const genToken = (userID, res) => {
     secure: false,
     sameSite: "lax",
   });
+
+  return;
 };
 
 export default genToken;

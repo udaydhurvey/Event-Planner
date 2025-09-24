@@ -1,5 +1,6 @@
 import Contact from "../models/contactUsModel.js";
-import sendEmail from "../utils/sendEmail.js"
+import Banquet from "../models/BanquetModel.js";
+import sendEmail from "../utils/sendEmail.js";
 
 export const GetAllContacts = async (req, res, next) => {
   try {
@@ -9,7 +10,6 @@ export const GetAllContacts = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const UpdateContacts = async (req, res, next) => {
   try {
@@ -75,6 +75,39 @@ export const UpdateContacts = async (req, res, next) => {
     await sendEmail(updatedQuery.email, updatedQuery.subject, mailBody);
 
     res.status(200).json({ message: "Contact Updated", data: updatedQuery });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const AddBanquetHall = async (req, res, next) => {
+  try {
+    const {
+      hallName,
+      managerName,
+      contactNumber,
+      capacity,
+      rent,
+      email,
+      featureDescription,
+      minBookingAmount,
+      address,
+    } = req.body;
+
+
+    const hall = await Banquet.create({
+      hallName,
+      managerName,
+      contactNumber,
+      capacity,
+      rent,
+      email,
+      featureDescription,
+      minBookingAmount,
+      address,
+    });
+
+    res.status(201).json({ message: "Banquet Hall Added", data: hall});
   } catch (error) {
     next(error);
   }

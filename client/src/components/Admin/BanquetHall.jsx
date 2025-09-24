@@ -1,15 +1,15 @@
-
 import React from "react";
 import { useState } from "react";
 import { FaEye, FaTrashAlt, FaEdit } from "react-icons/fa";
 import { IoAddCircleOutline } from "react-icons/io5";
+import AddBanquetHallModal from "./modals/AddBanquetHallModel";
 
 const BanquetHall = () => {
-  const [banquetHalls, setBanquetHall] = useState("");
-  const [addBanquetHallModel, setAddBanquetHallModel] = useState("false");
-  const [viewBanquetHallModel, setViewBanquetHallModel] = useState("false");
-  const [editBanquetHallModel, setEditBanquetHallModel] = useState("false");
-  const [deleteBanquetHallModel, setDeleteBanquetHallModel] = useState("false");
+  const [banquetHalls, setBanquetHall] = useState([]);
+  const [addBanquetHallModel, setAddBanquetHallModel] = useState(false);
+  const [viewBanquetHallModel, setViewBanquetHallModel] = useState(false);
+  const [editBanquetHallModel, setEditBanquetHallModel] = useState(false);
+  const [deleteBanquetHallModel, setDeleteBanquetHallModel] = useState(false);
 
   return (
     <>
@@ -68,14 +68,21 @@ const BanquetHall = () => {
               ))
             ) : (
               <>
-              <tr>
-                <td colSpan={6} className="text-center p-3 text-red-500" >--No Banquets Halls are available --</td>
-              </tr>
+                <tr>
+                  <td colSpan={6} className="text-center p-3 text-red-500">
+                    --No Banquets Halls are available --
+                  </td>
+                </tr>
               </>
             )}
           </tbody>
         </table>
       </div>
+
+      <AddBanquetHallModal
+        isOpen={addBanquetHallModel}
+        onClose={() => setAddBanquetHallModel(false)}
+      />
     </>
   );
 };

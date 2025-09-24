@@ -6,7 +6,7 @@ import api from "../config/api";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 
-function Login() {
+const Login =()=> {
   const navigate = useNavigate();
   const { user, setUser, isLogin, setIsLogin, isAdmin, setIsAdmin } = useAuth();
 

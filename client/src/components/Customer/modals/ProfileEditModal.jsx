@@ -123,6 +123,7 @@ const ProfileEditModal = ({ isOpen, onClose, oldData }) => {
               <IoIosCloseCircle className="text-3xl text-red-500" />
             </button>
           </div>
+          
 
           <div className="flex flex-col gap-3 p-4">
             <div className="relative w-36 h-36 mx-auto group transition-transform hover:scale-105 duration-300">

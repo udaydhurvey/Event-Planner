@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose";
 
-const BanquetSchema = new Schema(
+const BanquetSchema = mongoose.Schema(
   {
     hallName: {
       type: String,
