@@ -8,13 +8,22 @@ import connectDB from "./src/config/db.js";
 import AuthRoutes from "../server/src/routes/authRouter.js";
 import UserRouter from "../server/src/routes/userRoutes.js";
 import PublicRouter from "../server/src/routes/publicRouter.js";
-import AdminRouter from "../server/src/routes/adminRoutes.js"
+import AdminRouter from "../server/src/routes/adminRoutes.js";
 import cookieParser from "cookie-parser";
 import cloudinary from "./src/config/cloudinary.js";
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://your-Domain.com",
+      "http://your-Domain.com",
+    ],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -22,8 +31,8 @@ app.use(morgan("dev"));
 
 app.use("/auth", AuthRoutes);
 app.use("/user", UserRouter);
-app.use("/public",PublicRouter);
-app.use("/admin",AdminRouter);
+app.use("/public", PublicRouter);
+app.use("/admin", AdminRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "server connected" });
